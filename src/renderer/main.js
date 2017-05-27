@@ -15,3 +15,9 @@ new Vue({
   store,
   template: '<App/>'
 }).$mount('#app')
+
+import { remote } from 'electron'
+
+remote.app.on('before-quit', () => {
+  store.state.Asar.tmpPaths.forEach(fs.removeItem)
+})

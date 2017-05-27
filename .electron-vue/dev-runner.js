@@ -125,7 +125,7 @@ function startElectron () {
   })
 
   electronProcess.on('exit', (code, signal) => {
-    if (signal !== 'SIGTERM') process.exit()
+    if (signal) process.exit()
   })
 }
 

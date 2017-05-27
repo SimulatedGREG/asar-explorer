@@ -1,4 +1,5 @@
 import fs from 'fs-extra'
+import { remote } from 'electron'
 import { join } from 'path'
 
 /**
@@ -28,6 +29,34 @@ export function pathExists (path) {
  */
 export function stat (path) {
   return fs.stat(path)
+}
+
+/**
+ * Extract item from asar archive
+ * @param  {String} path
+ * @param  {String} name
+ * @return {Promise}
+ */
+export function extractFile (path, name) {
+  return new Promise(async (resolve, reject) => {
+    let tmpPath = join(remote.app.getPath('temp'), name)
+
+    try {
+      await fs.copySync(path, tmpPath)
+      resolve(tmpPath)
+    } catch (e) {
+      reject(e)
+    }
+  })
+}
+
+/**
+ * Remove file or folder from file system
+ * @param  {String} path
+ * @return {Promise}
+ */
+export function removeItem (path) {
+  return fs.removeSync(path)
 }
 
 /**

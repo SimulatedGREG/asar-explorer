@@ -1,5 +1,5 @@
 <template>
-  <div class="item">
+  <div class="item" ref="item" draggable>
     <div v-if="!isFile" class="file-icon">
       <svg width="18" height="18" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1728 608v704q0 92-66 158t-158 66h-1216q-92 0-158-66t-66-158v-960q0-92 66-158t158-66h320q92 0 158 66t66 158v32h672q92 0 158 66t66 158z" fill="#fff"/></svg>
     </div>
@@ -18,6 +18,15 @@
     computed: {
       isFile () {
         return this.item.stat.isFile()
+      }
+    },
+    mounted () {
+      this.$refs.item.ondragstart = async e => {
+        e.preventDefault()
+        let tmpPath = await this.$fs.extractFile(this.item.path, this.item.name)
+        this.$electron.ipcRenderer.send('ondragstart', tmpPath)
+
+        this.$store.commit('addTmpPath', tmpPath)
       }
     }
   }
@@ -43,12 +52,15 @@
   .file-name {
     flex: 1;
     overflow: hidden;
+    pointer-events: none;
     text-overflow: ellipsis;
+    user-select: none;
     white-space: nowrap;
   }
 
   .file-icon {
     margin-right: 8px;
     margin-bottom: -3px;
+    pointer-events: none;
   }
 </style>

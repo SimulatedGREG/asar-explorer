@@ -12,6 +12,9 @@ module.exports = {
   plugins: [
     'html'
   ],
+  globals: {
+    __static: true
+  },
   'rules': {
     // allow paren-less arrow functions
     'arrow-parens': 0,
