@@ -1,0 +1,111 @@
+{
+  "name": "asar-explorer",
+  "version": "0.0.0",
+  "description": "An electron-vue project",
+  "main": "./dist/electron/main.js",
+  "scripts": {
+    "build": "node .electron-vue/build.js && build",
+    "build:dir": "node .electron-vue/build.js && build --dir",
+    "build:web": "cross-env BUILD_TARGET=web node .electron-vue/build.js",
+    "dev": "node .electron-vue/dev-runner.js",
+    "lint": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter src",
+    "lint:fix": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter --fix src",
+    "pack": "npm run pack:main && npm run pack:renderer",
+    "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
+    "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
+    "postinstall": "npm run lint:fix"
+  },
+  "build": {
+    "productName": "asar-explorer",
+    "appId": "org.simulatedgreg.electron-vue",
+    "category": "public.app-category.tools",
+    "directories": {
+      "output": "build"
+    },
+    "files": [
+      "dist/electron",
+      "node_modules/",
+      "package.json"
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "mac": {
+      "icon": "build/icons/icon.icns"
+    },
+    "win": {
+      "icon": "build/icons/icon.ico"
+    },
+    "linux": {
+      "icon": "build/icons"
+    }
+  },
+  "author": "Greg Holguin <simulatedgreg@gmail.com>",
+  "license": null,
+  "dependencies": {
+    "axios": "^0.16.1",
+    "drag-drop": "^2.13.2",
+    "fs-extra": "^3.0.1",
+    "minireset.css": "^0.0.3",
+    "vue": "^2.2.2",
+    "vue-electron": "^1.0.6",
+    "vuex": "^2.1.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-eslint": "^7.0.0",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-transform-runtime": "^6.22.0",
+    "babel-preset-env": "^1.3.3",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.2.0",
+    "babel-runtime": "^6.6.1",
+    "babili-webpack-plugin": "^0.0.11",
+    "cfonts": "^1.1.3",
+    "chalk": "^1.1.3",
+    "copy-webpack-plugin": "^4.0.1",
+    "cross-env": "^3.1.4",
+    "css-loader": "^0.27.3",
+    "del": "^2.2.1",
+    "devtron": "^1.1.0",
+    "electron": "^1.3.1",
+    "electron-builder": "^11.4.4",
+    "electron-debug": "^1.1.0",
+    "electron-devtools-installer": "^2.0.1",
+    "electron-rebuild": "^1.1.3",
+    "eslint": "^3.13.1",
+    "eslint-config-standard": "^7.1.0",
+    "eslint-friendly-formatter": "^2.0.5",
+    "eslint-loader": "^1.3.0",
+    "eslint-plugin-html": "^2.0.0",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "extract-text-webpack-plugin": "^2.0.0-beta.4",
+    "file-loader": "^0.10.1",
+    "html-webpack-plugin": "^2.16.1",
+    "json-loader": "^0.5.4",
+    "multispinner": "^0.2.1",
+    "style-loader": "^0.16.0",
+    "tree-kill": "^1.1.0",
+    "url-loader": "^0.5.7",
+    "vue-html-loader": "^1.2.2",
+    "vue-loader": "^11.3.3",
+    "vue-style-loader": "^2.0.4",
+    "vue-template-compiler": "^2.2.2",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0",
+    "webpack-hot-middleware": "^2.18.0"
+  }
+}
