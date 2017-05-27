@@ -1,12 +1,13 @@
 import Vue from 'vue'
-import axios from 'axios'
+import * as fs from './fs'
 
 import App from './App'
 import store from './store'
 
-if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
-Vue.http = Vue.prototype.$http = axios
+Vue.use(require('vue-electron'))
 Vue.config.productionTip = false
+
+Vue.prototype.$fs = fs
 
 /* eslint-disable no-new */
 new Vue({

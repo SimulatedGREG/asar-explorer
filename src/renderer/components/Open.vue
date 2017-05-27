@@ -5,21 +5,17 @@
 </template>
 
 <script>
-  // import dragDrop from 'drag-drop'
-
   export default {
     name: 'Open',
     mounted () {
-      document.addEventListener('drop', function (e) {
+      document.addEventListener('drop', e => {
         e.preventDefault()
         e.stopPropagation()
-        for (let f of e.dataTransfer.files) {
-          console.log('File(s) you dragged here: ', f.path)
-        }
+        this.handleDrop(e.dataTransfer.files)
         return false
       })
 
-      document.addEventListener('dragover', function (e) {
+      document.addEventListener('dragover', e => {
         e.preventDefault()
         e.stopPropagation()
       })
@@ -28,8 +24,16 @@
       return { }
     },
     methods: {
-      hello (e) {
-        console.log(e)
+      async handleDrop (files) {
+        if (files.length > 1) return
+        if (!/\.asar$/.test(files[0].path)) return
+
+        try {
+          await this.$fs.pathExists(files[0].path)
+          this.$store.commit('setPath', files[0].path)
+        } catch (e) {
+          console.log(e)
+        }
       }
     }
   }
@@ -38,7 +42,6 @@
 <style scoped>
   #open {
     align-items: center;
-    background: linear-gradient(131deg, #ee0979, #ff6a00);
     display: flex;
     flex-direction: column;
     height: 100vh;
