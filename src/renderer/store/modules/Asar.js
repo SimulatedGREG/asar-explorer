@@ -1,8 +1,10 @@
 import * as fs from '../../fs'
 
 const state = {
+  asarName: 'yf.asar',
   contents: [],
-  path: '/Users/gregholguin/Desktop/yf.asar',
+  currentPath: '/Users/gregholguin/Desktop/yf.asar',
+  originalPath: '/Users/gregholguin/Desktop/yf.asar',
   tmpPaths: []
 }
 
@@ -11,14 +13,21 @@ const mutations = {
     state.tmpPaths.push(path)
   },
   clearAsar (state) {
+    state.asarName = ''
     state.contents = []
-    state.path = ''
+    state.originalPath = ''
+    state.currentPath = ''
   },
   setContents (state, contents) {
     state.contents = contents
   },
-  setPath (state, path) {
-    state.path = path
+  setOriginalPath (state, path) {
+    state.originalPath = path
+    state.currentPath = path
+    state.asarName = path.split(/\\|\//g).reverse()[0]
+  },
+  setCurrentPath (state, path) {
+    state.currentPath = path
   }
 }
 

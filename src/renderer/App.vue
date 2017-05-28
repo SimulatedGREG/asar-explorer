@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <open v-if="$store.state.Asar.path === ''"></open>
+    <open v-if="$store.state.Asar.originalPath === ''"></open>
     <explorer v-else></explorer>
   </div>
 </template>
@@ -24,7 +24,7 @@
 
   html,
   body {
-    background: linear-gradient(131deg, #ee0979, #ff6a00);
+    background: linear-gradient(131deg, #ff0f83, #b10b5c);
     color: #fff;
     font-family: 'Roboto', sans-serif;
     height: 100vh;

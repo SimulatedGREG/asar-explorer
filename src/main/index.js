@@ -20,8 +20,10 @@ function createWindow () {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
+    backgroundColor: '#ee0979',
     height: 540,
     useContentSize: true,
+    titleBarStyle: 'hidden',
     width: 360
   })
 
@@ -29,6 +31,10 @@ function createWindow () {
 
   mainWindow.on('closed', () => {
     mainWindow = null
+  })
+
+  mainWindow.webContents.on('will-navigate', e => {
+    e.preventDefault()
   })
 }
 

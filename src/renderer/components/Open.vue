@@ -30,7 +30,7 @@
 
         try {
           await this.$fs.pathExists(files[0].path)
-          this.$store.commit('setPath', files[0].path)
+          this.$store.commit('setOriginalPath', files[0].path)
         } catch (e) {
           console.log(e)
         }
