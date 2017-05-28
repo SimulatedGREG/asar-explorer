@@ -77,18 +77,6 @@
     user-select: none;
   }
 
-  header:before {
-    content: '';
-    background: rgba(255,255,255,.6);
-    display: block;
-    height: 22px;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    -webkit-app-region: drag;
-  }
-
   main {
     height: calc(100vh - 89px);
     overflow-y: auto;

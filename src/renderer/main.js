@@ -19,5 +19,5 @@ new Vue({
 import { remote } from 'electron'
 
 remote.app.on('before-quit', () => {
-  store.state.Asar.tmpPaths.forEach(fs.removeItem)
+  store.state.Asar.garbage.forEach(fs.removeItem)
 })

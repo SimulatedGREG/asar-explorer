@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div class="title-bar"></div>
     <open v-if="$store.state.Asar.originalPath === ''"></open>
     <explorer v-else></explorer>
   </div>
@@ -29,6 +30,18 @@
     font-family: 'Roboto', sans-serif;
     height: 100vh;
     overflow: hidden;
+  }
+
+  .title-bar {
+    content: '';
+    background: rgba(255,255,255,.6);
+    display: block;
+    height: 22px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    -webkit-app-region: drag;
   }
 
   ::-webkit-scrollbar {

@@ -34,7 +34,7 @@
         let tmpPath = await this.$fs.extractFile(this.item.path, this.item.name)
         this.$electron.ipcRenderer.send('ondragstart', tmpPath)
 
-        this.$store.commit('addTmpPath', tmpPath)
+        this.$store.commit('addGarbage', tmpPath)
       }
     }
   }

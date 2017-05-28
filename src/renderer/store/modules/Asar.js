@@ -1,16 +1,16 @@
 import * as fs from '../../fs'
 
 const state = {
-  asarName: 'yf.asar',
+  asarName: '',
   contents: [],
-  currentPath: '/Users/gregholguin/Desktop/yf.asar',
-  originalPath: '/Users/gregholguin/Desktop/yf.asar',
-  tmpPaths: []
+  currentPath: '',
+  originalPath: '',
+  garbage: []
 }
 
 const mutations = {
-  addTmpPath (state, path) {
-    state.tmpPaths.push(path)
+  addGarbage (state, path) {
+    state.garbage.push(path)
   },
   clearAsar (state) {
     state.asarName = ''
