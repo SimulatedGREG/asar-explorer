@@ -1,16 +1,15 @@
 <div align="center">
-  <img width="250" src="logo.png" alt="asar-explorer">
-  <br>
+  <br><img width="250" src="logo.png" alt="asar-explorer"><br>
 </div>
 
 <p align="center">
-  <em>Now you can snoop on all the electron apps</em>
+  <em>Now you can snoop through all the electron apps</em>
 </p>
 
-#### Screenshots
+### Screenshots
 coming soon...
 
-##### Build Setup
+#### Build Setup
 
 ``` bash
 # install dependencies
