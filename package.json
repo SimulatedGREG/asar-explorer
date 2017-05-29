@@ -1,6 +1,6 @@
 {
   "name": "asar-explorer",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "An electron-vue project",
   "main": "./dist/electron/main.js",
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "build": {
     "productName": "asar-explorer",
-    "appId": "org.simulatedgreg.electron-vue",
+    "appId": "org.simulatedgreg.asar-explorer",
     "category": "public.app-category.tools",
     "directories": {
       "output": "build"

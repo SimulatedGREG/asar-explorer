@@ -6,8 +6,13 @@
   <em>Now you can snoop through all the electron apps</em>
 </p>
 
-### Screenshots
-coming soon...
+<p align="center">
+  <img width="720" src="workflow.gif">
+</p>
+
+---
+
+This project is still in development, but most core functionality is ready to use.
 
 #### Build Setup
 
@@ -20,9 +25,6 @@ yarn run dev
 
 # build electron app for production
 yarn run build
-
-# lint all JS/Vue component files in `src`
-yarn run lint
 ```
 
 ---
