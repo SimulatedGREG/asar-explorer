@@ -76,7 +76,7 @@ if (process.env.NODE_ENV !== 'production') {
  * Adjust mainConfig for production settings
  */
 if (process.env.NODE_ENV === 'production') {
-  rendererConfig.plugins.push(
+  mainConfig.plugins.push(
     new BabiliWebpackPlugin({
       removeConsole: true,
       removeDebugger: true
