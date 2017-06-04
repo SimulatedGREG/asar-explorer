@@ -13,6 +13,7 @@ const mainConfig = require('./webpack.main.config')
 const rendererConfig = require('./webpack.renderer.config')
 
 let electronProcess = null
+let manualRestart = false
 let hotMiddleware
 
 function logStats (proc, data) {
@@ -62,7 +63,7 @@ function startRenderer () {
         quiet: true,
         setup (app, ctx) {
           app.use(hotMiddleware)
-          ctx.middleware.waitUntilValid((a) => {
+          ctx.middleware.waitUntilValid(() => {
             resolve()
           })
         }
@@ -94,8 +95,14 @@ function startMain () {
       logStats('Main', stats)
 
       if (electronProcess && electronProcess.kill) {
-        electronProcess.kill()
+        manualRestart = true
+        process.kill(electronProcess.pid)
+        electronProcess = null
         startElectron()
+
+        setTimeout(() => {
+          manualRestart = false
+        }, 5000)
       }
 
       resolve()
@@ -104,29 +111,35 @@ function startMain () {
 }
 
 function startElectron () {
-  electronProcess = spawn(electron, [path.join(__dirname, '../dist/electron/main.js')])
+  electronProcess = spawn(electron, ['--inspect=5858', path.join(__dirname, '../dist/electron/main.js')])
+
   electronProcess.stdout.on('data', data => {
-    let log = ''
-
-    data = data.toString().split(/\r?\n/)
-    data.forEach(line => {
-      log += '  ' + line + '\n'
-    })
-
-    if (/[0-9A-z]+/.test(data[0])) {
-      console.log(
-        chalk.blue.bold('┏ Electron -------------------') +
-        '\n\n' +
-        log +
-        chalk.blue.bold('┗ ----------------------------') +
-        '\n'
-      )
-    }
+    electronLog(data, 'blue')
+  })
+  electronProcess.stderr.on('data', data => {
+    electronLog(data, 'red')
   })
 
-  electronProcess.on('exit', (code, signal) => {
-    if (signal) process.exit()
+  electronProcess.on('close', () => {
+    if (!manualRestart) process.exit()
   })
+}
+
+function electronLog (data, color) {
+  let log = ''
+  data = data.toString().split(/\r?\n/)
+  data.forEach(line => {
+    log += `  ${line}\n`
+  })
+  if (/[0-9A-z]+/.test(log)) {
+    console.log(
+      chalk[color].bold('┏ Electron -------------------') +
+      '\n\n' +
+      log +
+      chalk[color].bold('┗ ----------------------------') +
+      '\n'
+    )
+  }
 }
 
 function greeting () {

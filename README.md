@@ -12,9 +12,11 @@
 
 ---
 
+#### [Download for macOS, Windows, or Linux](https://github.com/SimulatedGREG/asar-explorer/releases)
+
 This project is still in development, but most core functionality is ready to use.
 
-#### Build Setup
+##### Build Setup
 
 ``` bash
 # install dependencies
